@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+
+
+<body>
+    <div id="display">
+
+
+    </div>
+
+    <script>
+        const SERVER = "http://127.0.0.1:5000/"
+        axios(SERVER + '/categories').then(res => display.innerHTML = "<select id='cats' onchange='samp_select()'>" + res.data.map(cat =>
+            `<option value=${cat.catid}>
+            
+            ${cat.desc}
+            </option>`).join("")) + "</select>"
+
+
+
+
+        const samp_select = () => {
+            axios(`${SERVER}dis_cat/${cats.value}`);
+            console.log(cats.value);
+
+            if (cats.value == '1') {
+                Toastify({
+                    text: "This is a toHave some meat",
+                    className: "info",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
+            }
+            if (cats.value == '2') {
+                Toastify({
+                    text: "Have some milk!!!!!",  // Changed text
+                    className: "info",
+                    duration: 5000,  // Toast will show for 5 seconds
+                    style: {
+                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",  // Changed the gradient colors
+                        color: "#ffffff"  // Text color changed to white
+                    },
+                    gravity: "top",  // Toast will appear at the top
+                    position: "center",  // Toast will appear in the center horizontally
+                    close: true  // Added a close button
+                }).showToast();
+
+
+            }
+            if (cats.value == '3') {
+                Toastify({
+                    text: "A lover of the baked!!! 🎉",  // Message with an emoji
+                    duration: 4000,  // Toast will be displayed for 4 seconds
+                    className: "success",
+                    destination: "https://example.com",  // Clicking on the toast will navigate to this URL
+                    newWindow: true,  // Opens the link in a new tab
+                    style: {
+                        background: "linear-gradient(to right, #00c6ff, #0072ff)",  // Blue gradient
+                        color: "#ffffff",  // White text
+                        borderRadius: "8px",  // Rounded corners
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"  // Subtle shadow for a 3D effect
+                    },
+                    gravity: "bottom",  // Toast will appear at the bottom of the screen
+                    position: "right",  // Toast will appear at the right side of the screen
+                    stopOnFocus: true,  // Stops the timer when hovered over
+                    close: true  // Adds a close button
+                }).showToast();
+
+            }
+        }
+    </script>
+</body>
+
+
+</html>
